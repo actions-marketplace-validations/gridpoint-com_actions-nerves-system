@@ -51,7 +51,12 @@ runs:
         [ -d .nerves ] || (echo "VERSION file needs to be bumped or a config file needs to change to force a build"; exit 1)
     - name: Lint
       shell: bash
-      run: mix nerves.system.lint nerves_defconfig
+      run: |
+        if mix help nerves.system.lint >/dev/null 2>&1; then
+          mix nerves.system.lint nerves_defconfig
+        else
+          echo "nerves.system.lint command not available, skipping lint step"
+        fi
     - name: Create artifacts
       shell: bash
       run: |
