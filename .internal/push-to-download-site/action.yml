@@ -24,7 +24,7 @@ runs:
           BR2_BACKUP_SITE=http://sources.buildroot.net \
           source
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@v6
       with:
         role-to-assume: ${{ inputs.aws-role }}
         aws-region: ${{ inputs.aws-region }}

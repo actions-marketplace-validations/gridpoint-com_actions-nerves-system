@@ -64,12 +64,12 @@ runs:
         cp ./CHANGELOG.md deploy/system/CHANGELOG.md
         mix nerves.artifact ${GITHUB_REPOSITORY#*/} --path deploy/system/artifacts
     - name: Store artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: deploy/system/artifacts
         name: system
     - name: Save deploy cache
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v6
       with:
         path: deploy/system
         key: deploy/system-${{ github.sha }}-${{ github.ref_name }}
