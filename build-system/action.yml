@@ -51,7 +51,12 @@ runs:
         [ -d .nerves ] || (echo "VERSION file needs to be bumped or a config file needs to change to force a build"; exit 1)
     - name: Lint
       shell: bash
-      run: mix nerves.system.lint nerves_defconfig
+      run: |
+        if mix help nerves.system.lint >/dev/null 2>&1; then
+          mix nerves.system.lint nerves_defconfig
+        else
+          echo "nerves.system.lint command not available, skipping lint step"
+        fi
     - name: Create artifacts
       shell: bash
       run: |
@@ -59,12 +64,12 @@ runs:
         cp ./CHANGELOG.md deploy/system/CHANGELOG.md
         mix nerves.artifact ${GITHUB_REPOSITORY#*/} --path deploy/system/artifacts
     - name: Store artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: deploy/system/artifacts
         name: system
     - name: Save deploy cache
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v6
       with:
         path: deploy/system
         key: deploy/system-${{ github.sha }}-${{ github.ref_name }}

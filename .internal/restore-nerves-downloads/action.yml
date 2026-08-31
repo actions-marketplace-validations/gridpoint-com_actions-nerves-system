@@ -5,7 +5,7 @@ runs:
   using: composite
   steps:
     - name: Restore nerves downloads
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         path: ~/.nerves/dl
         key: nerves-dl-${{ github.ref_name }}-${{ github.sha }}

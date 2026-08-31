@@ -13,7 +13,7 @@ runs:
         done
         ls -l .toolchains/
     - name: Cache the buildroot ccache
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: ~/.buildroot-ccache
         key: buildroot-ccache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.toolchains/') }}

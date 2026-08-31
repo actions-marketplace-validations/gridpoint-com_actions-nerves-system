@@ -16,7 +16,7 @@ runs:
   using: composite
   steps:
     - name: Restore cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v6
       with:
         path: deploy/system
         key: deploy/system-${{ github.sha }}-${{ github.ref_name }}
